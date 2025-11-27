@@ -2,7 +2,7 @@ name: Deploy Adri Weather App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -17,23 +17,21 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout código
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Subir archivos como artefacto
-        uses: actions/upload-pages-artifact@v2
+      - name: Subir archivos como artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: "."
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - name: Deploy a GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
