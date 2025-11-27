@@ -1,6 +1,11 @@
 {
   "name": "Adri Weather App",
-  "short_name": "WeatherApp",
+  "short_name": "AdriWeather",
+  "description": "Aplicación del clima desarrollada por Adrián Ruiz.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff6a",
   "icons": [
     {
       "src": "./assets/icons/logowebweather.webp",
@@ -12,9 +17,5 @@
       "sizes": "512x512",
       "type": "image/webp"
     }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#00ff6a"
+  ]
 }
