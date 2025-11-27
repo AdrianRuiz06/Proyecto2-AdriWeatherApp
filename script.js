@@ -4,7 +4,6 @@ const searchBtn = document.getElementById("searchBtn");
 const cityInput = document.getElementById("cityInput");
 const gpsBtn = document.getElementById("gpsBtn");
 
-
 // ===== ENTER EVENT =====
 cityInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
@@ -14,7 +13,6 @@ cityInput.addEventListener("keypress", (e) => {
     }
 });
 
-
 // ===== BUTTON EVENT =====
 searchBtn.addEventListener("click", () => {
     getWeather(cityInput.value);
@@ -22,8 +20,7 @@ searchBtn.addEventListener("click", () => {
     cityInput.blur();
 });
 
-
-// ===== GET WEATHER MAIN FUNCTION =====
+// ===== MAIN WEATHER FUNCTION =====
 function getWeather(city) {
     if (city === "") return;
 
@@ -39,13 +36,11 @@ function getWeather(city) {
             }
 
             document.getElementById("errorMsg").classList.add("hidden");
-
             document.querySelector(".weather-box").classList.remove("hidden");
             document.querySelector(".details").classList.remove("hidden");
 
             document.getElementById("temperature").innerHTML = `${Math.round(data.main.temp)}°C`;
             document.getElementById("description").innerHTML = data.weather[0].description;
-
             document.getElementById("humidity").innerHTML = `${data.main.humidity}%`;
             document.getElementById("wind").innerHTML = `${data.wind.speed} km/h`;
 
@@ -85,7 +80,6 @@ function getWeather(city) {
         });
 }
 
-
 // ===== ERROR =====
 function showError() {
     document.querySelector(".weather-box").classList.add("hidden");
@@ -93,24 +87,17 @@ function showError() {
     document.getElementById("errorMsg").classList.remove("hidden");
 }
 
-
 // ===== HISTORIAL =====
 function addToHistory(city) {
     let history = JSON.parse(localStorage.getItem("history")) || [];
 
-    // Evitar duplicados
     history = history.filter(item => item.toLowerCase() !== city.toLowerCase());
-
-    // Añadir nuevo al principio
     history.unshift(city);
-
-    // Limitar a los 3 últimos
     history = history.slice(0, 3);
 
     localStorage.setItem("history", JSON.stringify(history));
     renderHistory();
 }
-
 
 function renderHistory() {
     const list = document.getElementById("historyList");
@@ -126,7 +113,6 @@ function renderHistory() {
 }
 
 renderHistory();
-
 
 // ===== GPS =====
 gpsBtn.addEventListener("click", () => {
@@ -144,8 +130,7 @@ gpsBtn.addEventListener("click", () => {
     });
 });
 
-
-// ===== FORECAST =====
+// ===== FORECAST (7 DÍAS) =====
 function getForecast(city) {
     const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&lang=es&appid=${API_KEY}`;
 
@@ -156,15 +141,28 @@ function getForecast(city) {
             forecast.innerHTML = "";
             forecast.classList.remove("hidden");
 
-            const dias = data.list.filter(item => item.dt_txt.includes("12:00:00"));
+            // Agrupar por día
+            const daily = {};
 
-            dias.forEach(dia => {
+            data.list.forEach(item => {
+                const date = item.dt_txt.split(" ")[0];
+                if (!daily[date]) daily[date] = [];
+                daily[date].push(item);
+            });
+
+            // Coger los primeros 7 días
+            const dias = Object.keys(daily).slice(0, 7);
+
+            dias.forEach(date => {
+                const items = daily[date];
+                const middle = items[Math.floor(items.length / 2)];
+
                 const div = document.createElement("div");
                 div.className = "forecast-day";
 
                 div.innerHTML = `
-                    <p>${new Date(dia.dt_txt).toLocaleDateString("es-ES", { weekday: "short" })}</p>
-                    <p>${Math.round(dia.main.temp)}°C</p>
+                    <p>${new Date(date).toLocaleDateString("es-ES", { weekday: "short" })}</p>
+                    <p>${Math.round(middle.main.temp)}°C</p>
                 `;
 
                 forecast.appendChild(div);
@@ -172,16 +170,14 @@ function getForecast(city) {
         });
 }
 
+// ===== HISTORIAL DESPLEGABLE =====
 document.getElementById("toggleHistory").addEventListener("click", () => {
-    const historyDiv = document.querySelector(".history");
+    const historyDiv = document.getElementById("historyContainer");
 
     historyDiv.classList.toggle("show");
 
-    // Cambiar flecha del botón
     const btn = document.getElementById("toggleHistory");
-    if (historyDiv.classList.contains("show")) {
-        btn.textContent = "Ocultar historial ▲";
-    } else {
-        btn.textContent = "Ver historial ▼";
-    }
+    btn.textContent = historyDiv.classList.contains("show")
+        ? "Ocultar historial ▲"
+        : "Ver historial ▼";
 });
