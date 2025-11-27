@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adri Weather App | Adrián Ruiz</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h2 class="title">Adri Weather App</h2>
+
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Introduce una ciudad...">
+            <button id="searchBtn">Buscar</button>
+        </div>
+
+        <button id="gpsBtn" class="gps">Usar mi ubicación</button>
+
+        <p id="errorMsg" class="error hidden">Ciudad no encontrada</p>
+
+        <div class="weather-box hidden">
+            <img id="weatherIcon" src="./assets/icons/clear-weather.webp" alt="Weather Icon">
+            <h2 id="temperature"></h2>
+            <p id="description"></p>
+        </div>
+
+        <div class="details hidden">
+            <div class="detail-item">
+                <p>Humedad</p>
+                <h3 id="humidity"></h3>
+            </div>
+
+            <div class="detail-item">
+                <p>Viento</p>
+                <h3 id="wind"></h3>
+            </div>
+        </div>
+
+        <!-- Pronóstico 5 días -->
+        <div id="forecast" class="forecast hidden"></div>
+
+        <!-- Historial -->
+        <div class="history-toggle">
+            <button id="toggleHistory">Ver historial ▼</button>
+        </div>
+
+        <div class="history collapsed">
+            <ul id="historyList"></ul>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
