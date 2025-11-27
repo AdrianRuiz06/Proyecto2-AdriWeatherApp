@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adri Weather App | Adrián Ruiz</title>
-    <link rel="icon" type="image/webp" href="./assets/icons/logowebweather.webp">
 
-        <!-- Mobile Icons -->
+    <!-- iOS Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- App Icons -->
+    <link rel="icon" type="image/webp" href="./assets/icons/logowebweather.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/logowebweather.webp">
     <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/logowebweather.webp">
+
+    <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 
     <link rel="stylesheet" href="style.css">
@@ -56,10 +62,9 @@
             <button id="toggleHistory">Ver historial ▼</button>
         </div>
 
-        <div class="history collapsed">
+        <div class="history hidden" id="historyContainer">
             <ul id="historyList"></ul>
         </div>
-
 
     </div>
 
