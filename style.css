@@ -477,3 +477,132 @@ body {
     width: 35px;
     margin: 5px 0;
 }
+
+/* ==========================================
+   RESPONSIVE — VERSION ORDENADOR / PANTALLAS GRANDES
+   ========================================== */
+
+@media (min-width: 900px) {
+
+    /* --- Centrar la app y hacerla más estrecha --- */
+    .app {
+        max-width: 600px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+
+    /* --- Logo más pequeño y centrado --- */
+    .home-logo {
+        width: 180px;
+        margin-top: 20px;
+    }
+
+    /* --- Título principal --- */
+    .home-title {
+        font-size: 38px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    /* --- Buscador --- */
+    .search-box {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .search-box input {
+        width: 350px;
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .search-box button {
+        width: 120px;
+        font-size: 16px;
+        height: 48px;
+    }
+
+    /* --- Botón GPS --- */
+    .gps-btn {
+        width: 480px;
+        margin: 0 auto;
+        display: block;
+        height: 50px;
+        font-size: 16px;
+    }
+
+    /* --- Panel del tiempo --- */
+    #weatherPanel {
+        max-width: 650px;
+        margin: 0 auto;
+        padding-bottom: 80px;
+    }
+
+    /* --- Cabecera cuando se muestra la ciudad --- */
+    .top-header {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+
+    /* --- Bloque principal del tiempo --- */
+    .temp-big {
+        font-size: 90px;
+    }
+
+    .temp-icon {
+        width: 100px;
+    }
+
+    /* --- Indicadores (precipitación / humedad / viento) --- */
+    .indicators {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 25px;
+        border-radius: 20px;
+        margin-top: 25px;
+    }
+
+    .ind-item img {
+        width: 33px;
+    }
+
+    /* --- Gráfica de temperatura --- */
+    .graph-section {
+        margin-top: 20px;
+    }
+
+    #tempGraph {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* --- Gráfica de onda (horas) --- */
+    #hourlyWave {
+        height: 140px;
+    }
+
+    .hourly-chart {
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    /* --- 7 días --- */
+    .days-row {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: visible;
+    }
+
+    .day-card {
+        width: 75px;
+        padding: 12px 0;
+    }
+
+    .day-card img {
+        width: 40px;
+    }
+}
