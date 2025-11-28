@@ -3,70 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adri Weather App | Adrián Ruiz</title>
-
-    <!-- iOS Web App -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-    <!-- App Icons -->
-    <link rel="icon" type="image/webp" href="./assets/icons/logowebweather.webp">
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/logowebweather.webp">
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/logowebweather.webp">
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
+    <title>Adri Weather App</title>
 
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="icon" type="image/webp" href="./assets/icons/logowebweather.webp">
+    <link rel="apple-touch-icon" href="./assets/icons/logowebweather.webp">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="app">
 
-        <h2 class="title">Adri Weather App</h2>
+    <!-- HOME PANEL (LOGO + BUSCADOR) -->
+    <div id="homePanel" class="home-panel">
+
+        <img src="./assets/icons/logowebweather.webp" class="home-logo" alt="Logo App">
+
+        <h1 class="home-title">El Tiempo</h1>
 
         <div class="search-box">
-            <input type="text" id="cityInput" placeholder="Introduce una ciudad...">
+            <input type="text" id="cityInput" placeholder="Buscar ciudad...">
             <button id="searchBtn">Buscar</button>
         </div>
 
-        <button id="gpsBtn" class="gps">Usar mi ubicación</button>
-
-        <p id="errorMsg" class="error hidden">Ciudad no encontrada</p>
-
-        <div class="weather-box hidden">
-            <img id="weatherIcon" src="./assets/icons/clear-weather.webp" alt="Weather Icon">
-            <h2 id="temperature"></h2>
-            <p id="description"></p>
-        </div>
-
-        <div class="details hidden">
-            <div class="detail-item">
-                <p>Humedad</p>
-                <h3 id="humidity"></h3>
-            </div>
-
-            <div class="detail-item">
-                <p>Viento</p>
-                <h3 id="wind"></h3>
-            </div>
-        </div>
-
-        <!-- Pronóstico 5 días -->
-        <div id="forecast" class="forecast hidden"></div>
-
-        <!-- Historial -->
-        <div class="history-toggle">
-            <button id="toggleHistory">Ver historial ▼</button>
-        </div>
-
-        <div class="history hidden" id="historyContainer">
-            <ul id="historyList"></ul>
-        </div>
+        <button id="gpsBtn" class="gps-btn">Usar ubicación</button>
 
     </div>
+
+    <!-- TOP HEADER (VISIBLE SOLO AL VER EL TIEMPO) -->
+    <div class="top-header hidden" id="topHeader">
+        <button id="backBtn" class="back-btn">←</button>
+        <h1 id="cityName" class="city-name">Ciudad</h1>
+    </div>
+
+    <!-- WEATHER PANEL -->
+    <div id="weatherPanel" class="hidden">
+
+    <!-- HEADER -->
+    <div class="card-top">
+        <div class="location-row">
+            <span class="loc-icon">📍</span>
+            <span id="cityName">Ciudad</span>
+        </div>
+        <p id="dateLabel" class="date-label"></p>
+    </div>
+
+    <!-- TEMPERATURA -->
+    <div class="temp-block">
+        <span id="temperature" class="temp-big">22°</span>
+        <img id="weatherIcon" class="temp-icon" src="./assets/icons/clear-weather.webp">
+        <p id="description" class="temp-desc">Despejado</p>
+    </div>
+
+    <!-- INDICADORES -->
+    <div class="indicators">
+        <div class="ind-item">
+            <img src="./assets/icons/rainweather.webp" class="ind-icon">
+            <p id="precip">30%</p>
+            <span>Precipitación</span>
+        </div>
+
+        <div class="ind-item">
+            <img src="./assets/icons/mist-weather.webp" class="ind-icon">
+            <p id="humidity">20%</p>
+            <span>Humedad</span>
+        </div>
+
+        <div class="ind-item">
+            <img src="./assets/icons/wind.png" class="ind-icon">
+            <p id="wind">12 km/h</p>
+            <span>Viento</span>
+        </div>
+    </div>
+
+    <!-- GRÁFICA -->
+    <h3 class="next-title">Hoy por horas</h3>
+<div id="hourlyBox" class="hourly-row"></div>
+
+
+    <!-- 7 DÍAS -->
+    <h3 class="next-title">7-Day Forecast</h3>
+
+    <div id="forecast" class="days-row"></div>
+
+</div>
+
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
 </html>
